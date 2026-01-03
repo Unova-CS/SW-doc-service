@@ -1,0 +1,80 @@
+<!-- src/views/brand-upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Brand Uploaded Document - Smart-Ways</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #F59A23;
+      margin-top: 0;
+    }
+    .form-group {
+      margin: 15px 0;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #F59A23;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d6811f;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #F59A23;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Brand an Unbranded PDF</h2>
+    <p>Upload a plain PDF document to apply Smart-Ways Solutions branding (logo, header, footer, PACRA compliance).</p>
+
+    <form method="POST" action="/docs/brand-upload" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Select PDF File</label>
+        <input type="file" id="file" name="file" accept=".pdf" required />
+      </div>
+      <button type="submit">Apply Branding & Download</button>
+    </form>
+
+    <a href="/admin/dashboard" class="back-link">← Back to Admin Dashboard</a>
+  </div>
+</body>
+</html>

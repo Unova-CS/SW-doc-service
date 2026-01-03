@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart-Ways Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 40px; }
+    .card { background: white; padding: 25px; margin: 15px 0; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 600px; }
+    h2 { color: #F59A23; margin-top: 0; }
+    a { display: inline-block; margin-top: 10px; padding: 8px 16px; background: #F59A23; color: white; text-decoration: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Welcome, {{username}}!</h2>
+    <p>Role: <strong>{{role}}</strong></p>
+    
+    {{#if isAdmin}}
+      <p><a href="/admin/dashboard">📁 Admin Dashboard</a></p>
+      <p><a href="/brand">🎨 Manage Branding</a></p>
+    {{/if}}
+
+    <p><a href="/docs/new">✍️ Create New Document</a></p>
+    <p><a href="/auth/logout">🚪 Logout</a></p>
+  </div>
+</body>
+</html>

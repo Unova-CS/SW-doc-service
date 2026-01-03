@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Document - Smart-Ways</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; }
+    .logout-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #e74c3c;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .logout-btn:hover { background: #c0392b; }
+    h2 { color: #F59A23; margin-top: 0; margin-bottom: 20px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    .item-row { display: flex; gap: 10px; margin-top: 8px; }
+    .item-row input { flex: 1; }
+    button { background: #F59A23; color: white; border: none; padding: 12px 20px; border-radius: 4px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+    button:hover { background: #d6811f; }
+    .hidden { display: none; }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #F59A23;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .error { color: #e74c3c; font-size: 14px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/auth/logout" class="logout-btn">Logout</a>
+    <h2>Create New Document</h2>
+    
+    <form id="docForm" method="POST" action="/docs/generate">
+      <!-- Error placeholder -->
+      <div id="formError" class="error" style="display:none;"></div>
+
+      <label>Document Type</label>
+      <select name="type" id="docType" required>
+        <option value="letterhead">Letterhead</option>
+        <option value="invoice">Invoice</option>
+        <option value="quotation">Quotation</option>
+      </select>
+
+      <!-- Letterhead Fields -->
+      <div id="letterheadFields">
+        <label>Client First Name</label>
+        <input type="text" name="clientFirstName" />
+        <label>Client Last Name</label>
+        <input type="text" name="clientLastName" />
+        <label>Client Phone</label>
+        <input type="text" name="clientPhone" />
+        <label>Client Address</label>
+        <textarea name="clientAddress" rows="2"></textarea>
+        <label>Date</label>
+        <input type="date" name="date" />
+        <label>Sender First Name</label>
+        <input type="text" name="senderFirstName" value="Smart-Ways" />
+        <label>Sender Last Name</label>
+        <input type="text" name="senderLastName" value="Team" />
+        <label>Letter Content</label>
+        <textarea name="content" rows="8" placeholder="Enter your letter content..."></textarea>
+      </div>
+
+      <!-- Invoice Fields -->
+      <div id="invoiceFields" class="hidden">
+        <label>Client First Name</label>
+        <input type="text" name="clientFirstName" />
+        <label>Client Last Name</label>
+        <input type="text" name="clientLastName" />
+        <label>Client Phone</label>
+        <input type="text" name="clientPhone" />
+        <label>Date</label>
+        <input type="date" name="date" required />
+        <label>Due Date</label>
+        <input type="date" name="dueDate" required />
+        <div id="invoiceItems">
+          <label>Line Items</label>
+          <div class="item-row">
+            <input type="text" name="itemDesc[]" placeholder="Description" />
+            <input type="number" name="itemPrice[]" placeholder="Price (ZMW)" step="0.01" min="0" />
+          </div>
+        </div>
+        <button type="button" onclick="addInvoiceItem()">+ Add Item</button>
+      </div>
+
+      <!-- Quotation Fields -->
+      <div id="quotationFields" class="hidden">
+        <label>Client Company Name</label>
+        <input type="text" name="clientName" />
+        <label>Client Address</label>
+        <textarea name="clientAddress" rows="2"></textarea>
+        <label>Date</label>
+        <input type="date" name="dateQ" required />
+        <label>Valid Until</label>
+        <input type="date" name="validUntil" required />
+        <div id="quoteItems">
+          <label>Line Items</label>
+          <div class="item-row">
+            <input type="text" name="quoteDesc[]" placeholder="Description" />
+            <input type="number" name="quoteAmount[]" placeholder="Amount (ZMW)" step="0.01" min="0" />
+          </div>
+        </div>
+        <button type="button" onclick="addQuotationItem()">+ Add Item</button>
+      </div>
+
+      <button type="submit">Generate PDF</button>
+    </form>
+
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+  </div>
+
+  <script>
+    // Set today as default
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll('input[type="date"]').forEach(el => {
+      if (!el.value) el.value = today;
+    });
+
+    function toggleFields() {
+      const type = document.getElementById('docType').value;
+      document.getElementById('letterheadFields').classList.toggle('hidden', type !== 'letterhead');
+      document.getElementById('invoiceFields').classList.toggle('hidden', type !== 'invoice');
+      document.getElementById('quotationFields').classList.toggle('hidden', type !== 'quotation');
+    }
+
+    function addInvoiceItem() {
+      const container = document.getElementById('invoiceItems');
+      const div = document.createElement('div');
+      div.className = 'item-row';
+      div.innerHTML = `
+        <input type="text" name="itemDesc[]" placeholder="Description" />
+        <input type="number" name="itemPrice[]" placeholder="Price (ZMW)" step="0.01" min="0" />
+      `;
+      container.appendChild(div);
+    }
+
+    function addQuotationItem() {
+      const container = document.getElementById('quoteItems');
+      const div = document.createElement('div');
+      div.className = 'item-row';
+      div.innerHTML = `
+        <input type="text" name="quoteDesc[]" placeholder="Description" />
+        <input type="number" name="quoteAmount[]" placeholder="Amount (ZMW)" step="0.01" min="0" />
+      `;
+      container.appendChild(div);
+    }
+
+    // Form validation
+    document.getElementById('docForm').addEventListener('submit', function(e) {
+      const errorDiv = document.getElementById('formError');
+      errorDiv.style.display = 'none';
+
+      const type = document.getElementById('docType').value;
+      if (type === 'invoice') {
+        const invoiceDate = new Date(document.querySelector('[name="date"]').value);
+        const dueDate = new Date(document.querySelector('[name="dueDate"]').value);
+        if (dueDate < invoiceDate) {
+          e.preventDefault();
+          errorDiv.textContent = "Due date cannot be earlier than invoice date.";
+          errorDiv.style.display = 'block';
+          return;
+        }
+      } else if (type === 'quotation') {
+        const quoteDate = new Date(document.querySelector('[name="dateQ"]').value);
+        const validUntil = new Date(document.querySelector('[name="validUntil"]').value);
+        if (validUntil < quoteDate) {
+          e.preventDefault();
+          errorDiv.textContent = "Valid until date cannot be earlier than quotation date.";
+          errorDiv.style.display = 'block';
+          return;
+        }
+      }
+    });
+
+    document.getElementById('docType').addEventListener('change', toggleFields);
+    toggleFields();
+
+    // Support default type from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const defaultType = urlParams.get('default');
+    if (defaultType && ['letterhead', 'invoice', 'quotation'].includes(defaultType)) {
+      document.getElementById('docType').value = defaultType;
+      toggleFields();
+    }
+  </script>
+</body>
+</html>

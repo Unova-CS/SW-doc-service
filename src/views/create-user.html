@@ -1,0 +1,38 @@
+<!-- src/views/create-user.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create User - Smart-Ways</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 40px; }
+    .form-box { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #F59A23; margin-top: 0; }
+    label { display: block; margin: 15px 0 5px; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    button { background: #F59A23; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+    .back { display: inline-block; margin-top: 20px; color: #F59A23; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Create New User</h2>
+    <form method="POST" action="/admin/users/create">
+      <label>Username</label>
+      <input type="text" name="username" required />
+
+      <label>Password</label>
+      <input type="password" name="password" required minlength="6" />
+
+      <label>Role</label>
+      <select name="role" required>
+        <option value="admin">Admin</option>
+        <option value="finance">Finance</option>
+        <option value="staff">Staff</option>
+      </select>
+
+      <button type="submit">Create User</button>
+    </form>
+    <a href="/admin/users" class="back">← Back to User Management</a>
+  </div>
+</body>
+</html>

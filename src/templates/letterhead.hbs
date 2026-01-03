@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 30px; background: #fff; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #F59A23; padding-bottom: 15px; margin-bottom: 20px; }
+    .logo { width: 120px; }
+    .sender-info { font-size: 14px; line-height: 1.6; }
+    .recipient { margin: 20px 0; }
+    .content { font-size: 14px; line-height: 1.8; margin: 20px 0; }
+    .signature { margin-top: 60px; font-style: italic; }
+    .footer { font-size: 10px; text-align: center; margin-top: 40px; padding-top: 10px; border-top: 1px solid #ddd; color: #666; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="{{logoPath}}" class="logo" />
+    <div class="sender-info">
+      <strong>{{company.name}}</strong><br>
+      {{company.email}} | {{company.phone}}<br>
+      {{company.address}}
+    </div>
+  </div>
+
+  <!-- Recipient -->
+  <div class="recipient">
+    <strong>To:</strong><br>
+    {{data.first_name}} {{data.last_name}}<br>
+    {{data.phone}}<br>
+    {{data.address}}
+  </div>
+
+  <!-- Date -->
+  <div style="text-align: right; margin-bottom: 20px;">
+    <strong>Date:</strong> {{data.date}}
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    Dear Mr. {{data.first_name}} {{data.last_name}},<br><br>
+    {{data.company_description_1}}<br><br>
+    {{data.company_description_2}}<br><br>
+    Best Regards,<br>
+    {{data.sender_first_name}} {{data.sender_last_name}}<br>
+    {{data.company_name}}
+  </div>
+
+  <!-- Signature -->
+  <div class="signature">
+    _________________________<br>
+    {{data.sender_first_name}} {{data.sender_last_name}}<br>
+    {{data.company_name}}
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Smart-Ways Solutions — All rights reserved<br>
+    Plot 9812/15a, Godfrey Chitalu Road, Nyumba Yanga, Lusaka<br>
+    Email: smartwayssolutions1@gmail.com | Phone: +260 777 644 161<br>
+    PACRA Registration No. 320200015637
+  </div>
+
+</body>
+</html>

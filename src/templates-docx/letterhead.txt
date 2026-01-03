@@ -1,0 +1,15 @@
+
+<p><strong>SMART-WAYS SOLUTIONS</strong><br>
+Plot 9812/15a, Godfrey Chitalu Road, Nyumba Yanga, Lusaka<br>
+Email: {{company_email}} | Phone: {{company_phone}}<br>
+PACRA Registration No. {{pacra_number}}</p>
+
+<hr style="border:0; border-top:2px solid #F59A23; margin:20px 0;">
+
+<p>{{date}}</p>
+
+<p>To: {{to_name}}<br>{{to_address}}</p>
+
+<p>{{content}}</p>
+
+<p>Best Regards,<br>{{sender_name}}</p>

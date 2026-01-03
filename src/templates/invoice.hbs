@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 30px; background: #fff; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #F59A23; padding-bottom: 15px; margin-bottom: 20px; }
+    .logo { width: 120px; }
+    .invoice-title { font-size: 24px; color: #000; font-weight: bold; text-align: center; margin: 20px 0; }
+    .invoice-number { font-size: 14px; text-align: right; margin-bottom: 20px; }
+    .client-info { margin: 20px 0; }
+    .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .table th, .table td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+    .table th { background: #F59A23; color: white; font-weight: bold; }
+    .totals { margin: 20px 0; text-align: right; }
+    .payment-info { margin-top: 30px; font-size: 12px; line-height: 1.5; }
+    .footer { font-size: 10px; text-align: center; margin-top: 40px; padding-top: 10px; border-top: 1px solid #ddd; color: #666; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="{{logoPath}}" class="logo" />
+    <div style="text-align: right;">
+      <strong>Smart-Ways Solutions</strong><br>
+      {{company.email}} | {{company.phone}}<br>
+      {{company.address}}
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="invoice-title">INVOICE</div>
+
+  <!-- Invoice Number & Date -->
+  <div class="invoice-number">
+    <strong>Invoice No:</strong> {{number}}<br>
+    <strong>Invoice Date:</strong> {{data.invoice_date}}
+  </div>
+
+  <!-- Client Info -->
+  <div class="client-info">
+    <strong>Billed To:</strong><br>
+    {{data.first_name}} {{data.last_name}}<br>
+    {{data.phone}}
+  </div>
+
+  <!-- Items Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data.items}}
+      <tr>
+        <td>{{this.description}}</td>
+        <td>ZMW {{this.price}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><strong>Subtotal:</strong></td>
+        <td>ZMW {{data.total_price}}</td>
+      </tr>
+      <tr>
+        <td><strong>Tax (20%):</strong></td>
+        <td>ZMW {{data.tax}}</td>
+      </tr>
+      <tr>
+        <td><strong>Grand Total:</strong></td>
+        <td>ZMW {{data.final_price}}</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Payment Info -->
+  <div class="payment-info">
+    <strong>PAYMENT INFORMATION:</strong><br>
+    Bank Name: {{company.bankName}}<br>
+    Bank No: {{company.bankNo}}<br>
+    Email: {{company.email}}
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Smart-Ways Solutions — All rights reserved<br>
+    Plot 9812/15a, Godfrey Chitalu Road, Nyumba Yanga, Lusaka<br>
+    Email: smartwayssolutions1@gmail.com | Phone: +260 777 644 161<br>
+    PACRA Registration No. 320200015637
+  </div>
+
+</body>
+</html>

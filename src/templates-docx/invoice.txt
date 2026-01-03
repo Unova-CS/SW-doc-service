@@ -1,0 +1,20 @@
+
+<p><strong>SMART-WAYS SOLUTIONS</strong><br>
+Plot 9812/15a, Godfrey Chitalu Road, Nyumba Yanga, Lusaka<br>
+Email: {{company_email}} | Phone: {{company_phone}}<br>
+PACRA Registration No. {{pacra_number}}</p>
+
+<h1 style="color:#F59A23;">INVOICE</h1>
+<p><strong>Invoice No:</strong> {{number}}<br>
+<strong>Date:</strong> {{invoice_date}}</p>
+
+<h2>Bill To:</h2>
+<p>{{client_name}}<br>{{client_phone}}</p>
+
+{#items}
+<p>{{description}} — ZMW {{price}}</p>
+{/items}
+
+<p><strong>Subtotal:</strong> ZMW {{subtotal}}<br>
+<strong>Tax (20%):</strong> ZMW {{tax}}<br>
+<strong>Grand Total:</strong> ZMW {{final_price}}</p>

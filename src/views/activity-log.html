@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activity Log - Smart-Ways</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; margin: 0; }
+    .container { max-width: 1000px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    h1 { color: #F59A23; margin: 0; }
+    a { color: #F59A23; text-decoration: none; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+    th { background: #fdf6f0; color: #d35400; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>System Activity Log</h1>
+      <a href="/admin/dashboard">← Back to Dashboard</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>User</th>
+          <th>Action</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each logs}}
+        <tr>
+          <td>{{formatDate this.timestamp}}</td>
+          <td>{{this.user.username}}</td>
+          <td>{{this.action}}</td>
+          <td>
+            {{#if this.details.targetUserId}}
+              Target User ID: {{this.details.targetUserId}}
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

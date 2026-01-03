@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: smartways-docs
+    env: node
+    region: frankfurt  # or your preferred region
+    buildCommand: "npm install"
+    startCommand: "node src/app.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false  # You'll set this in Render dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: BASE_URL
+        value: https://smartways-docs.onrender.com  # Replace with your render URL
+
+databases:
+  - name: smartways-docs-db
+    databaseName: smartways_docs
+    region: frankfurt
