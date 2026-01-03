@@ -15,7 +15,7 @@ services:
       - key: JWT_SECRET
         sync: false
       - key: BASE_URL
-        value: https://smartways-docs.onrender.com  # Replace with your render URL
+        value: https://sw-doc-service.onrender.com/
 
 databases:
   - name: smartways-docs-db
