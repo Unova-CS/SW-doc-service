@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_URI).then(async () => {
 
   const admin = new User({
     username: "admin",
-    password: "password",
+    password: "SuperSecurePass2025!",
     role: "admin"
   });
 

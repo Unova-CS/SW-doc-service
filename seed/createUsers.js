@@ -9,9 +9,9 @@ mongoose.connect(process.env.MONGO_URI).then(async () => {
   // Create team members
   const users = [
     { username: "admin", password: "password", role: "admin" },
-    { username: "brian", password: "password", role: "admin" },        // CEO
-    { username: "majory", password: "password", role: "finance" },     // Finance Director
-    { username: "chibotu", password: "password", role: "admin" }       // You (Tech Lead)
+    { username: "brian", password: "SuperSecurePass2025!s", role: "admin" },        // CEO
+    { username: "majory", password: "SuperSecurePass2025!", role: "finance" },     // Finance Director
+    { username: "chibotu", password: "SuperSecurePass2025!", role: "admin" }       // You (Tech Lead)
   ];
 
   for (const u of users) {
